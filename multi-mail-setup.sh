@@ -43,7 +43,7 @@ main() {
         # run the setup script on the VPS
         echo "Running the setup script on the remote VPS at $ip"
         ssh -o StrictHostKeyChecking=no "${ssh_username}@${ip}" '
-        wget -O $mail_setup_url
+        wget $mail_setup_url
         bash ./mail-setup.sh $1 $2
         '
 
