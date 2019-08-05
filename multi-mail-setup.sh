@@ -51,4 +51,4 @@ main() {
     done
 }
 
-mail "$@"
+main "$@"
