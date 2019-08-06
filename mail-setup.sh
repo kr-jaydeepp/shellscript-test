@@ -96,18 +96,18 @@ create_dums_config()
 {
         # checks if file is regular file and non-zero size
         if [[ -f "$dums_config_file" && -s "$dums_config_file"  ]] ; then
-                echo "$dums_config_file already exists"
-        else
-                # enters email id's inside the config file
-                for mailid in "${mailids[@]}" ; do
-                echo "mailid=$mailid" | sudo tee -a "$dums_config_file"
-                done
-
-                # checks if threshold_disk_space variable present in this script and is non empty then it add it to dums.conf file
-                if [[ -n "$threshold_disk_space" ]] ; then
-                        echo "threshold_disk_space=$threshold_disk_space" | sudo tee -a "$dums_config_file"
-                fi
+                echo "$dums_config_file already exists. Appending entries to it."
         fi
+
+        # enters email id's inside the config file
+        for mailid in "${mailids[@]}" ; do
+                echo "mailid=$mailid" | sudo tee -a "$dums_config_file"
+        done
+
+        # checks if threshold_disk_space variable present in this script and is non empty then it add it to dums.conf file
+        if [[ -n "$threshold_disk_space" ]] ; then
+                echo "threshold_disk_space=$threshold_disk_space" | sudo tee -a "$dums_config_file"
+        fi        
 }
 
 download_dums

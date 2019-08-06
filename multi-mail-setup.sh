@@ -2,16 +2,11 @@
 
 #####################################################################################################################################
 # script is responsible for setting up postfix environment and installing dums script.                                              #
-# script need to be provided with three arguement which are sender_emailid ,sender_passwd and listofip                              #
+# script need to be provided with three arguement which are sender_emailid ,sender_passwd and file_listofip                         #
 # Example:                                                                                                                          #
 # ./multi-mail-setup.sh sender_emailid sender_passwd listofip                                                                       #
 #                                                                                                                                   #
 # It download dums.sh script and take care that dums.sh is executed every hour on all the machine listed in listofip file.          #
-# It also creates an dums.conf file and inserts mailids and threshold_disk_space if explicitly mentioned in this script to it.      #
-# mailid are extracted from mailids variable in this script. Format for the same is like:                                           #
-#                                                                                                                                   #
-# mailids=(reciever1@company.com reciever2@company.com)                                                                             #
-# there can be any number of space separated mailid in mailids varaible and all of them would be notified at appropriate condition  #
 #####################################################################################################################################
 
 #ssh username
@@ -31,11 +26,14 @@ Example: ./multi_mail_setup.sh sender_emailid sender_passwd listofip"
         exit 1
     fi 
 
-    # get the list of IP addresses
+    # get the list of IP addresses, true if file exits and it's a regular file
     if [[ -f "$3" ]]; then
         # read from the $1
         while read -r line; do
-            ips+=("$line")
+            #takes care that every line is non-empty string
+            if[[ ! -z "$line" ]]; then
+                ips+=("$line")
+            fi
         done < "$3"
     else
         echo "Error: pass a file with list of IP as third arguement to script"
