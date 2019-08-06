@@ -109,4 +109,4 @@ create_dums_config
 sudo chmod +x "$dums_script_dir/dums.sh"
 
 # adds the script in crontab so that it runs the script every hour.
-(crontab -l 2>/dev/null; echo "@hourly cd $dums_script_dir && ./dums.sh") | crontab -a
+(crontab -l 2>/dev/null; echo "@hourly cd $dums_script_dir && ./dums.sh") | crontab -

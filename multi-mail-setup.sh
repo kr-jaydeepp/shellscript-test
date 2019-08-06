@@ -16,7 +16,7 @@ ssh_username="root"
 mail_setup_url="https://raw.githubusercontent.com/kr-jaydeepp/shellscript-test/master/mail-setup.sh"
 
 #Path address for mail-setup script 
-mail_setup_script="$HOME/mail-setup.sh"
+mail_setup_script="mail-setup.sh"
 
 #array of IP's
 ips=()
@@ -47,10 +47,13 @@ Example: ./multi_mail_setup.sh sender_emailid sender_passwd listofip"
         # run the setup script on the VPS
         echo "Running the setup script on the remote VPS at $ip"
         ssh -o StrictHostKeyChecking=no "${ssh_username}@${ip}" '
-        wget -O "$mail_setup_script" '"${mail_setup_url}"';
-        bash '"${mail_setup_script}"' '"${1}"' '"${2}"';
-        rm '"${mail_setup_script}"'
-        '
+	wget '"${mail_setup_url}"';
+	echo "mail-setup.sh script downloaded";
+	bash '"${mail_setup_script}"' '"${1}"' '"${2}"';
+	echo "mail-setup.sh script execution completed"
+	rm '"${mail_setup_script}"'
+	echo "removed mail-setup script"
+	'
 
         echo "Mail-setup completed for $ip"
     done
