@@ -47,8 +47,8 @@ Example: ./multi_mail_setup.sh sender_emailid sender_passwd listofip"
         echo "Running the setup script on the remote VPS at $ip"
         ssh -o StrictHostKeyChecking=no "${ssh_username}@${ip}" '
         wget -O mail-setup.sh '"${mail_setup_url}"';
-        bash mail-setup.sh '"${1}"' '"${2}"
-        ' 
+        bash mail-setup.sh '"${1}"' '"${2}"'
+        '
 
         echo "Mail-setup completed for $ip"
     done
