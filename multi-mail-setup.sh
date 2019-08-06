@@ -14,8 +14,13 @@
 # there can be any number of space separated mailid in mailids varaible and all of them would be notified at appropriate condition  #
 #####################################################################################################################################
 
+#ssh username
 ssh_username="root"
+
+#location of mail-setup script
 mail_setup_url="https://raw.githubusercontent.com/kr-jaydeepp/shellscript-test/master/mail-setup.sh"
+
+#array of IP's
 ips=()
 
 main() {
@@ -40,8 +45,10 @@ Example: ./multi_mail_setup.sh sender_emailid sender_passwd listofip"
     for ip in "${ips[@]}"; do
         # run the setup script on the VPS
         echo "Running the setup script on the remote VPS at $ip"
-        ssh -o StrictHostKeyChecking=no "${ssh_username}@${ip}" 'wget "$mail_setup_url"; bash mail-setup.sh $1 $2
-        '
+        ssh -o StrictHostKeyChecking=no "${ssh_username}@${ip}" '
+        wget -O mail-setup.sh '"${mail_setup_url}"';
+        bash mail-setup.sh '"${1}"' '"${2}"
+        ' 
 
         echo "Mail-setup completed for $ip"
     done
