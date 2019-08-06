@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -eo pipefail
-
 #####################################################################################################################################
 # script is responsible for setting up postfix environment and installing dums script.                                              #
 # script need to be provided with three arguement which are sender_emailid ,sender_passwd and listofip                              #
@@ -24,7 +22,7 @@ main() {
     # checks if two arguements are suppied or not
     if [[ $# -ne 3 ]] ; then
         echo "Error: pass emailid, passwd and file with list of IP as arguements to the script!
-        Example: ./multi_mail_setup.sh sender_emailid sender_passwd listofip"
+Example: ./multi_mail_setup.sh sender_emailid sender_passwd listofip"
         exit 1
     fi 
 
@@ -43,8 +41,8 @@ main() {
         # run the setup script on the VPS
         echo "Running the setup script on the remote VPS at $ip"
         ssh -o StrictHostKeyChecking=no "${ssh_username}@${ip}" '
-        wget $mail_setup_url
-        bash ./mail-setup.sh $1 $2
+        wget "$mail_setup_url"
+        bash mail-setup.sh $1 $2
         '
 
         echo "Mail-setup completed for $ip"
