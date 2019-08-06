@@ -15,8 +15,8 @@
 #####################################################################################################################################
 
 ssh_username="root"
-ips=()
 mail_setup_url="https://raw.githubusercontent.com/kr-jaydeepp/shellscript-test/master/mail-setup.sh"
+ips=()
 
 main() {
     # checks if two arguements are suppied or not
@@ -40,9 +40,7 @@ Example: ./multi_mail_setup.sh sender_emailid sender_passwd listofip"
     for ip in "${ips[@]}"; do
         # run the setup script on the VPS
         echo "Running the setup script on the remote VPS at $ip"
-        ssh -o StrictHostKeyChecking=no "${ssh_username}@${ip}" '
-        wget "$mail_setup_url"
-        bash mail-setup.sh $1 $2
+        ssh -o StrictHostKeyChecking=no "${ssh_username}@${ip}" 'wget "$mail_setup_url"; bash mail-setup.sh $1 $2
         '
 
         echo "Mail-setup completed for $ip"
