@@ -15,7 +15,9 @@ sender_mailid="$1"
 sender_mailid_passwd="$2"
 
 #array of reciever email ids
-mailids=(reciever1@company.com reciever2@company.com reciever3@company.com)
+mailids=(jaydeep.purohit@knackroot.com jaydeeppurohit1996@gmail.com)
+
+threshold_disk_space=10
 
 #postfix config file
 postfix_conf_file='/etc/postfix/main.cf'
